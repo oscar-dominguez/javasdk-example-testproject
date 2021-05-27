@@ -11,21 +11,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.testng.annotations.Optional;
 
 import java.io.IOException;
 
 public final class DriverFactory {
-    static WebDriver createWebDriver (String browserType) throws InvalidTokenException, AgentConnectException, ObsoleteVersionException, IOException {
-        if (browserType.equalsIgnoreCase("Chrome")) {
+    static WebDriver createWebDriver(@Optional("Chrome") final String browser) throws InvalidTokenException,
+            AgentConnectException, ObsoleteVersionException, IOException {
+        if (browser.equalsIgnoreCase("chrome")) {
             return new ChromeDriver(new ChromeOptions());
-        }
-        else if (browserType.equalsIgnoreCase("Edge")) {
+        } else if (browser.equalsIgnoreCase("msedge")) {
             return new EdgeDriver(new EdgeOptions());
-        }
-        else if (browserType.equalsIgnoreCase("Firefox")) {
+        } else if (browser.equalsIgnoreCase("firefox")) {
             return new FirefoxDriver(new FirefoxOptions());
-        }else {
-            throw new InvalidArgumentException("Browser type '" + browserType + "' not supported!");
+        } else {
+            throw new InvalidArgumentException("Browser type '" + browser + "' not supported!");
         }
     }
 }
