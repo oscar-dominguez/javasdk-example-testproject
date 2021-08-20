@@ -35,5 +35,5 @@ jobs:
         run: java -version
       # Runs a single command using the runners shell
       - name: Java build
-        run: java mvn clean verify
+        run: mvn clean verify
     
