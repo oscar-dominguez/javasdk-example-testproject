@@ -44,9 +44,7 @@ jobs:
       
       - name: Check style
         run: |
-          export CHECKSTYLE_VERSION=v0.13.0
-          export REVIEWDOG_VERSION=v0.10.0
-          wget -O - -q https://github.com/checkstyle/checkstyle/releases/download/${CHECKSTYLE_VERSION}/checkstyle-${CHECKSTYLE_VERSION}-all.jar > /tmp/checkstyle.jar
+          wget -O - -q https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.45.1/checkstyle-8.45.1-all.jar > /tmp/checkstyle.jar
           echo "wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh"
           exec java -jar /tmp/checkstyle.jar -c /sun_checks.xml src/main/java -f xml
           ls -la
