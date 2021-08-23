@@ -42,9 +42,13 @@ jobs:
       - name: Java build
         run: mvn clean verify
         
-      - name: Run check style
-        uses: nikitasavinov/checkstyle-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: 'github-pr-check'
-          tool_name: 'jdk11'
+      - name: Install check style
+        uses: reviewdog/action-setup@v1
+      - name: Check style
+        run: |
+          export INPUT_CHECKSTYLE_VERSION=v0.13.0
+          wget -O - -q https://github.com/checkstyle/checkstyle/releases/download/checkstyle-${INPUT_CHECKSTYLE_VERSION}/checkstyle-${INPUT_CHECKSTYLE_VERSION}-all.jar > /tmp/checkstyle.jar
+          export REVIEWDOG_TOKEN=${{ secrets.REVIEWDOG_TOKEN }}
+          exec java -jar /tmp/checkstyle.jar
+          exec reviewdog -f=checkstyle -reporter="github-pr-check"
+  
