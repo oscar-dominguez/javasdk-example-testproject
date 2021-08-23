@@ -46,8 +46,7 @@ jobs:
         run: |
           wget -O - -q https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.45.1/checkstyle-8.45.1-all.jar > /tmp/checkstyle.jar
           echo "wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /tmp v0.13.0"
-          exec java -jar /tmp/checkstyle.jar -c /sun_checks.xml src/main/java -f xml
-          echo "/tmp/reviewdog -f=checkstyle -reporter=github-pr-review"
+          exec java -jar /tmp/checkstyle.jar -c /sun_checks.xml src/main/java -f xml | /tmp/reviewdog -f=checkstyle -reporter=github-pr-review
         env:
           REVIEWDOG_TOKEN: ${{ secrets.REVIEWDOG_TOKEN }}
 
