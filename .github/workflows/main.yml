@@ -49,4 +49,5 @@ jobs:
           exec java -jar /tmp/checkstyle.jar -c /sun_checks.xml src/main/java -f xml | /tmp/reviewdog -f=checkstyle -reporter=github-pr-review
         env:
           REVIEWDOG_TOKEN: ${{ secrets.REVIEWDOG_TOKEN }}
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ github.token }}
 
