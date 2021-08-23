@@ -49,8 +49,8 @@ jobs:
           CHECKSTYLE_VERSION=v0.13.0
           REVIEWDOG_VERSION=v0.10.0
           wget -O - -q https://github.com/checkstyle/checkstyle/releases/download/${CHECKSTYLE_VERSION:-v0.13.0}/checkstyle-${CHECKSTYLE_VERSION:-v0.13.0}-all.jar > /tmp/checkstyle.jar
-          wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s -- -b /usr/local/bin/ ${REVIEWDOG_VERSION}
-          exec java -jar /tmp/checkstyle.jar -c /sun_checks.xml src/main/java | reviewdog -reporter=github-pr-review
+          wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s -- -b > /tmp ${REVIEWDOG_VERSION}
+          exec java -jar /tmp/checkstyle.jar -c /sun_checks.xml src/main/java | /tmp/reviewdog -reporter=github-pr-review
         env:
           REVIEWDOG_TOKEN: ${{ secrets.REVIEWDOG_TOKEN }}
 
