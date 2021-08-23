@@ -52,5 +52,5 @@ jobs:
           exec java -jar /tmp/checkstyle.jar
           exec reviewdog -f=checkstyle -reporter="github-pr-check"
         env:
-          REVIEWDOG_TOKEN=${{ secrets.REVIEWDOG_TOKEN }}
+          REVIEWDOG_TOKEN: ${{ secrets.REVIEWDOG_TOKEN }}
 
