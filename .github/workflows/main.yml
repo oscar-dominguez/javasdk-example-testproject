@@ -48,7 +48,7 @@ jobs:
         run: |
           export INPUT_CHECKSTYLE_VERSION=v0.13.0
           wget -O - -q https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.45.1/checkstyle-8.45.1-all.jar > /tmp/checkstyle.jar
-          exec java -jar /tmp/checkstyle.jar
+          exec java -jar /tmp/checkstyle.jar c /sun_checks.xml src/main/java
         env:
           REVIEWDOG_TOKEN: ${{ secrets.REVIEWDOG_TOKEN }}
 
