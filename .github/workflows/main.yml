@@ -41,16 +41,16 @@ jobs:
       # Runs a single command using the runners shell
       - name: Java build
         run: mvn clean verify
-        
-      - name: Install check style
-        uses: reviewdog/action-setup@v1
+      
       - name: Check style
         run: |
           CHECKSTYLE_VERSION=v0.13.0
           REVIEWDOG_VERSION=v0.10.0
           wget -O - -q https://github.com/checkstyle/checkstyle/releases/download/${CHECKSTYLE_VERSION:-v0.13.0}/checkstyle-${CHECKSTYLE_VERSION:-v0.13.0}-all.jar > /tmp/checkstyle.jar
           wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s -- -b > /tmp ${REVIEWDOG_VERSION}
-          exec java -jar /tmp/checkstyle.jar -c /sun_checks.xml src/main/java -f xml | /tmp/reviewdog -f=checkstyle -reporter=github-pr-review
+          exec java -jar /tmp/checkstyle.jar -c /sun_checks.xml src/main/java -f xml
+          ls -la
+          echo "/tmp/reviewdog -f=checkstyle -reporter=github-pr-review"
         env:
           REVIEWDOG_TOKEN: ${{ secrets.REVIEWDOG_TOKEN }}
 
